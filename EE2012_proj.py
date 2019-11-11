@@ -70,6 +70,39 @@ def probability_beyond_x_years(x):
     print("If the expected lifetime is 4, the probability is", 1 - Ft(4, x))
     print("If the expected lifetime is 5, the probability is", 1 - Ft(5, x))
     
+    
+def inverse_get(expected_year, random_number):
+    lam = 1 / expected_year
+    return (1 / (-lam)) * np.log(1 - random_number)
+
+def inverse_cdf():
+    t = np.linspace(0, 20, 10000)
+    array_random_number = np.random.rand(100)
+    array_cdf_t = [None]*100
+    for i in range (100):
+        array_cdf_t[i] = inverse_get(3, array_random_number[i])
+        
+    plt.plot(t, ft(3, t), label = 'pdf_3')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
+    plt.title("PDF against time")
+    plt.legend()
+    plt.show()
+    
+    for i in range (100):
+        array_cdf_t[i] = inverse_get(4, array_random_number[i])
+    plt.plot(t, ft(4, t), label = 'pdf_4')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
+    plt.title("PDF against time")
+    plt.legend()
+    plt.show()
+    
+    for i in range (100):
+        array_cdf_t[i] = inverse_get(5, array_random_number[i])
+    plt.plot(t, ft(5, t), label = 'pdf_5')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
+    plt.title("PDF against time")
+    plt.legend()
+    plt.show()
 
 """
 Input: None
@@ -80,3 +113,4 @@ if __name__ == '__main__':
     pdf_cdf()
     x = 5
     probability_beyond_x_years(x)
+    inverse_cdf()
