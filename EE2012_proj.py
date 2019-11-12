@@ -133,12 +133,30 @@ def inverse_cdf_1000_points():
     for i in range (1000):
         array_cdf_t[i] = inverse_get(3, array_random_number[i])
     
+    array_random_number_1 = np.random.rand(100)
+    array_cdf_t_100 = [None]*100
+    for i in range (100):
+        array_cdf_t_100[i] = inverse_get(3, array_random_number[i])
+
+    plt.subplot(1, 2, 1)
+    plt.plot(t, ft(3, t), label = 'PDF(t = 3)')
+    plt.hist(array_cdf_t_100, bins=np.arange(20), density = 1, label = 'histogram')  
+    plt.title("PDF against time 100 data points")
+    plt.legend()
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
+    #plt.show()
+
+
+    plt.subplot(1, 2, 2)
     plt.plot(t, ft(3, t), label = 'PDF(t = 3)')
     plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  
     plt.title("PDF against time 1000 data points")
     plt.legend()
     plt.xlabel('T (number of years)')
     plt.ylabel('Probability')
+    
+    plt.tight_layout()
     plt.show()
 
 """
