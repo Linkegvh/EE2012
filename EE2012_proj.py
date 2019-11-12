@@ -50,11 +50,11 @@ def pdf_cdf():
     
     pdf_5, =plt.plot(t, ft(5, t))
     cdf_5, =plt.plot(t, Ft(5, t))
+    plt.title('PDF and CDF against time')
+    plt.legend((pdf_3, cdf_3, pdf_4, cdf_4, pdf_5, cdf_5), ('PDF(t = 3)', 'CDF(t = 3)', 'PDF(t = 4)', 'CDF(t = 4)', 'PDF(t = 4)', 'CDF(t = 5)'))
     
-    plt.legend((pdf_3, cdf_3, pdf_4, cdf_4, pdf_5, cdf_5), ('pdf_3', 'cdf_3', 'pdf_4', 'cdf_4', 'pdf_5', 'cdf_5'))
-    
-    plt.xlabel('$t$')
-    plt.ylabel('$Probability$')
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
     plt.show()
 """
 Input: Number years that the electrical component will last beyond
@@ -64,11 +64,11 @@ Output: the probability of the electrical component that will last beyond the in
 """
 
 def probability_beyond_x_years(x):
-    print("This is the probability of a component that lasts beyong", x, "years")
+    print("This is the probability of a component that lasts beyond", x, "years")
     
-    print("If the expected lifetime is 3, the probability is", 1 - Ft(3, x))
-    print("If the expected lifetime is 4, the probability is", 1 - Ft(4, x))
-    print("If the expected lifetime is 5, the probability is", 1 - Ft(5, x))
+    print("If the expected lifetime is 3 years, the probability is", 1 - Ft(3, x))
+    print("If the expected lifetime is 4 years, the probability is", 1 - Ft(4, x))
+    print("If the expected lifetime is 5 years, the probability is", 1 - Ft(5, x))
     
 """
 Input: The expected functional years and the random number generated from numpy random
@@ -85,43 +85,70 @@ Input: no input
 
 Output: print the inverse CDF result on a histogram for expected years as 3, 4 and 5 and their corresponding PDF.
 """
-def inverse_cdf():
+def inverse_cdf_100_points():
     t = np.linspace(0, 20, 10000)
     array_random_number = np.random.rand(100)
     array_cdf_t = [None]*100
     for i in range (100):
         array_cdf_t[i] = inverse_get(3, array_random_number[i])
-        
-    plt.plot(t, ft(3, t), label = 'pdf_3')
-    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
-    plt.title("PDF against time")
+
+
+    plt.plot(t, ft(3, t), label = 'PDF(t = 3)')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  
+    plt.title("PDF against time 100 data points")
     plt.legend()
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
     plt.show()
     
     for i in range (100):
         array_cdf_t[i] = inverse_get(4, array_random_number[i])
-    plt.plot(t, ft(4, t), label = 'pdf_4')
-    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
-    plt.title("PDF against time")
+    plt.plot(t, ft(4, t), label = 'PDF(t = 4)')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  
+    plt.title("PDF against time 100 data points")
     plt.legend()
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
     plt.show()
     
     for i in range (100):
         array_cdf_t[i] = inverse_get(5, array_random_number[i])
-    plt.plot(t, ft(5, t), label = 'pdf_5')
-    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  # arguments are passed to np.histogram
-    plt.title("PDF against time")
+    plt.plot(t, ft(5, t), label = 'PDF(t = 5)')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  
+    plt.title("PDF against time 100 data points")
     plt.legend()
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
     plt.show()
 
 """
 Input: None
 
-Output: Run the above program for at least once
+Output: Print a graph for 1000 data points inverse transform method histogram
 """
+def inverse_cdf_1000_points():
+    t = np.linspace(0, 20, 10000)
+    array_random_number = np.random.rand(1000)
+    array_cdf_t = [None]*1000
+    for i in range (1000):
+        array_cdf_t[i] = inverse_get(3, array_random_number[i])
+    
+    plt.plot(t, ft(3, t), label = 'PDF(t = 3)')
+    plt.hist(array_cdf_t, bins=np.arange(20), density = 1, label = 'histogram')  
+    plt.title("PDF against time 1000 data points")
+    plt.legend()
+    plt.xlabel('T (number of years)')
+    plt.ylabel('Probability')
+    plt.show()
 
+"""
+Input: None
+
+Output: To run the above program for at least once
+"""
 if __name__ == '__main__':
     pdf_cdf()
     x = 5
     probability_beyond_x_years(x)
-    inverse_cdf()
+    inverse_cdf_100_points()
+    inverse_cdf_1000_points()
