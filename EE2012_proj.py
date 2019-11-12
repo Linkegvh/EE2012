@@ -70,11 +70,21 @@ def probability_beyond_x_years(x):
     print("If the expected lifetime is 4, the probability is", 1 - Ft(4, x))
     print("If the expected lifetime is 5, the probability is", 1 - Ft(5, x))
     
+"""
+Input: The expected functional years and the random number generated from numpy random
     
+Output:The inverse CDF result
+"""
+
 def inverse_get(expected_year, random_number):
     lam = 1 / expected_year
     return (1 / (-lam)) * np.log(1 - random_number)
 
+"""
+Input: no input
+
+Output: print the inverse CDF result on a histogram for expected years as 3, 4 and 5 and their corresponding PDF.
+"""
 def inverse_cdf():
     t = np.linspace(0, 20, 10000)
     array_random_number = np.random.rand(100)
@@ -109,6 +119,7 @@ Input: None
 
 Output: Run the above program for at least once
 """
+
 if __name__ == '__main__':
     pdf_cdf()
     x = 5
