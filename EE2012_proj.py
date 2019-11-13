@@ -3,6 +3,44 @@ created by Ding Lingke
 Matriculation Number: A0189238N
 
 11/11/2019
+
+Description:
+    This python code is supposed to answer the questions posed by EE2012 Project by graphically plot the graph
+    of the PDF and the CDF of the function as well as the inverse transformation method. 
+
+    This code is seperated into mainly three parts, with the first two part mainly concerning the plotting and 
+    answering of different questions posed by the project and the third part as the mathmatical support functions
+    to similify the calculation and code elegance. 
+
+    Part 1: To answer Q1
+        
+        Functions involved:
+            pdf_cdf()
+            probability_beyond_x_years(x) 
+        
+        Expaination:
+            - pdf_cdf() funtion corresponds with the Q1 part C as it will show the plot of PDF and CDF curve for t = 3, 4, 5
+            in the same figure
+
+            - probability_beyond_x_years(x) function corresponds with the Q1 part D as it will compute and return a text output
+            about the probability of a component lasting beyond x number of years for t = 3, 4, 5. The default for this function is x = 5, 
+            as per the question instruction. However, users are allowed to call this function with a different x value to compute
+            the probability of a component lasting beyond that particular x value
+    
+    Part 2: To answer Q2
+
+        Function involved:
+            inverse_cdf_100_points()      
+            inverse_cdf_1000_points()
+        
+        Explaination:
+            - inverse_cdf_100_points() corresponds with the Q2 part B and it will output three plots, correspond to t = 3, 4, 5. Each of
+            this plot is a combination of a histogram of weight against T for the inverse transformation method as well as a PDF curve for 
+            comparision.
+
+            - inverse_cdf_1000_points() corresponds to Q2 part D. It will only output one plot with two sub plots to show the comparision
+            between choosing only 100 data points and choosing 1000 data points. 
+
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -136,7 +174,7 @@ def inverse_cdf_1000_points():
     array_random_number_1 = np.random.rand(100)
     array_cdf_t_100 = [None]*100
     for i in range (100):
-        array_cdf_t_100[i] = inverse_get(3, array_random_number[i])
+        array_cdf_t_100[i] = inverse_get(3, array_random_number_1[i])
 
     plt.subplot(1, 2, 1)
     plt.plot(t, ft(3, t), label = 'PDF(t = 3)')
@@ -165,8 +203,8 @@ Input: None
 Output: To run the above program for at least once
 """
 if __name__ == '__main__':
-    pdf_cdf()
-    x = 5
-    probability_beyond_x_years(x)
-    inverse_cdf_100_points()
-    inverse_cdf_1000_points()
+    pdf_cdf()                       #Q1
+    x = 5                           #Q1
+    probability_beyond_x_years(x)   #Q1
+    inverse_cdf_100_points()        #Q2
+    inverse_cdf_1000_points()       #Q2
